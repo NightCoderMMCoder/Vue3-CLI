@@ -70,12 +70,18 @@
     </div>
     {{ numberPlus }}
     <button v-on:click="this.numberPlus = Math.random()">Click Me</button>
+    <Test v-if="showTestCom"></Test>
+    <button v-on:click="showTestCom = false">Click</button>
   </div>
 </template>
 
 <script>
+import Test from "./components/Test";
 export default {
   name: "App",
+  components: {
+    Test,
+  },
   data() {
     return {
       text: "",
@@ -110,6 +116,7 @@ export default {
       showText: false,
       count: 100,
       number: 4,
+      showTestCom: true,
     };
   },
   computed: {
@@ -135,6 +142,25 @@ export default {
         this.number = val;
       },
     },
+  },
+  beforeCreate() {
+    console.log("beforeCreate");
+  },
+  created() {
+    console.log(this.publicPost);
+    console.log("created");
+  },
+  beforeMount() {
+    console.log("beforeMount");
+  },
+  mounted() {
+    console.log("mounted");
+  },
+  beforeUpdate() {
+    console.log("beforeUpdate");
+  },
+  updated() {
+    console.log("updated");
   },
 };
 </script>
