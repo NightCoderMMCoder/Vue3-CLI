@@ -1,4 +1,5 @@
 <template>
+  <h1>App</h1>
   <TheHeader></TheHeader>
   <div class="container">
     <CalculateTransaction></CalculateTransaction>
@@ -22,5 +23,3 @@ export default {
   },
 };
 </script>
-
-<style></style>
