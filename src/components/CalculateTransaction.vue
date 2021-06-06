@@ -1,7 +1,6 @@
 <template>
   <h4>Your Balance</h4>
-  <h1 id="balance">{{ totalBalance }} ks</h1>
-
+  <h1 id="balance">{{ minusOrPlus }}{{ totalBalance }} ks</h1>
   <div class="inc-exp-container">
     <div>
       <h4>Income</h4>
@@ -36,6 +35,12 @@ export default {
       return this.formatToCurrency(
         this.transactions.reduce((total, cur) => total + cur.amount, 0)
       );
+    },
+    minusOrPlus() {
+      return Number(this.calcIncome.replace(/[^0-9\.]+/g, "")) >
+        Number(this.calcExpense.replace(/[^0-9\.]+/g, ""))
+        ? "+"
+        : "-";
     },
   },
   methods: {

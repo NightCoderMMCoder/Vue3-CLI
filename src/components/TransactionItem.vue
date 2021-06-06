@@ -3,7 +3,7 @@
     {{ transaction.name }}
     <span>
       {{ minusOrPlus }}
-      {{ Math.abs(transaction.amount) }} ks
+      {{ formatToCurrency }} ks
     </span>
     <button
       class="delete-btn"
@@ -24,6 +24,11 @@ export default {
     },
     minusOrPlus() {
       return this.transaction.amount > 0 ? "+" : "-";
+    },
+    formatToCurrency() {
+      return Math.abs(this.transaction.amount)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, "$&,");
     },
   },
 };

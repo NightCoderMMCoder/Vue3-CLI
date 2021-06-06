@@ -7,7 +7,7 @@
       :transactions="transactions"
       @delete-transaction="removeTransaction"
     ></transactions-list>
-    <add-transaction></add-transaction>
+    <add-transaction v-on:add-transaction="addTransaction"></add-transaction>
   </div>
 </template>
 
@@ -16,6 +16,7 @@ import AddTransaction from "./components/AddTransaction.vue";
 import CalculateTransaction from "./components/CalculateTransaction.vue";
 import TheHeader from "./components/Layouts/TheHeader.vue";
 import TransactionsList from "./components/TransactionsList.vue";
+import { v4 as uuidv4 } from "uuid";
 export default {
   name: "App",
   components: {
@@ -51,6 +52,12 @@ export default {
         (transaction) => transaction.id === id
       );
       this.transactions.splice(idx, 1);
+    },
+    addTransaction(transaction) {
+      this.transactions.push({
+        id: uuidv4(),
+        ...transaction,
+      });
     },
   },
 };
