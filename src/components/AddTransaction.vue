@@ -8,6 +8,7 @@
         v-model.trim="transaction.name"
         placeholder="Enter text..."
       />
+      <small v-if="errors.name" class="error">{{ errors.name }}</small>
     </div>
     <div class="form-control">
       <label for="amount"
@@ -19,6 +20,7 @@
         v-model.number="transaction.amount"
         placeholder="Enter amount..."
       />
+      <small v-if="errors.amount" class="error">{{ errors.amount }}</small>
     </div>
     <button class="btn" type="submit">Add transaction</button>
   </form>
@@ -34,16 +36,35 @@ export default {
         name: "",
         amount: "",
       },
+      errors: {},
     };
   },
   methods: {
     addTransaction() {
-      this.$emit("addTransaction", this.transaction);
-      this.transaction.name = "";
-      this.transaction.amount = "";
+      const isValidate = this.validation();
+      if (isValidate) {
+        this.$emit("addTransaction", this.transaction);
+        this.transaction.name = "";
+        this.transaction.amount = "";
+      }
+    },
+    validation() {
+      this.errors = {};
+      let formValidate = true;
+      for (let [key, value] of Object.entries(this.transaction)) {
+        if (!value) {
+          this.errors[key] = `Please Enter a ${key} field`;
+          formValidate = false;
+        }
+      }
+      return formValidate;
     },
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+.error {
+  color: red;
+}
+</style>
