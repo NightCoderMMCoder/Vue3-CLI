@@ -3,7 +3,10 @@
   <TheHeader></TheHeader>
   <div class="container">
     <CalculateTransaction></CalculateTransaction>
-    <transactions-list :transactions="transactions"></transactions-list>
+    <transactions-list
+      :transactions="transactions"
+      @delete-transaction="removeTransaction"
+    ></transactions-list>
     <add-transaction></add-transaction>
   </div>
 </template>
@@ -41,6 +44,14 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    removeTransaction(id) {
+      const idx = this.transactions.findIndex(
+        (transaction) => transaction.id === id
+      );
+      this.transactions.splice(idx, 1);
+    },
   },
 };
 </script>

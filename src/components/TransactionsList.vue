@@ -5,6 +5,7 @@
       v-for="transaction in transactions"
       :key="transaction.id"
       :transaction="transaction"
+      @delete-transaction="$emit('deleteTransaction', $event)"
     ></transaction-item>
   </ul>
 </template>
@@ -14,6 +15,7 @@ import TransactionItem from "./TransactionItem.vue";
 export default {
   components: { TransactionItem },
   props: ["transactions"],
+  emits: ["deleteTransaction"],
 };
 </script>
 

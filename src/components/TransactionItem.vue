@@ -5,13 +5,19 @@
       {{ minusOrPlus }}
       {{ Math.abs(transaction.amount) }} ks
     </span>
-    <button class="delete-btn">x</button>
+    <button
+      class="delete-btn"
+      @click="$emit('deleteTransaction', transaction.id)"
+    >
+      x
+    </button>
   </li>
 </template>
 
 <script>
 export default {
   props: ["transaction"],
+  emits: ["deleteTransaction"],
   computed: {
     listClass() {
       return this.transaction.amount > 0 ? "plus" : "minus";
