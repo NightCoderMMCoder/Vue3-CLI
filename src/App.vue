@@ -53,6 +53,21 @@
       <input type="number" v-model.number="age" />
     </div>
     <p>{{ nameTransform }}</p>
+    <div>
+      <h1>Calculator App</h1>
+      <input type="text" v-model.number="firstNum" />
+      <select v-model="symbol">
+        <option>+</option>
+        <option>-</option>
+        <option>*</option>
+        <option>/</option>
+      </select>
+      <input type="text" v-model.number="secondNum" />
+      =
+      <span>
+        {{ result }}
+      </span>
+    </div>
   </div>
 </template>
 
@@ -87,11 +102,25 @@ export default {
       task: "",
       age: 20,
       name: "myo thant kyaw",
+      firstNum: "",
+      secondNum: "",
+      symbol: "+",
     };
   },
   computed: {
     nameTransform() {
       return this.name.charAt(0).toUpperCase();
+    },
+    result() {
+      if (this.symbol === "+") {
+        return this.firstNum + this.secondNum;
+      } else if (this.symbol === "-") {
+        return this.firstNum - this.secondNum;
+      } else if (this.symbol === "*") {
+        return this.firstNum * this.secondNum;
+      } else if (this.symbol === "/") {
+        return this.firstNum / this.secondNum;
+      }
     },
   },
 };
