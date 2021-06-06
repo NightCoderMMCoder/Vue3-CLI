@@ -68,6 +68,8 @@
         {{ result }}
       </span>
     </div>
+    {{ numberPlus }}
+    <button v-on:click="this.numberPlus = Math.random()">Click Me</button>
   </div>
 </template>
 
@@ -105,6 +107,9 @@ export default {
       firstNum: "",
       secondNum: "",
       symbol: "+",
+      showText: false,
+      count: 100,
+      number: 4,
     };
   },
   computed: {
@@ -121,6 +126,14 @@ export default {
       } else if (this.symbol === "/") {
         return this.firstNum / this.secondNum;
       }
+    },
+    numberPlus: {
+      get() {
+        return this.number + 1;
+      },
+      set(val) {
+        this.number = val;
+      },
     },
   },
 };
