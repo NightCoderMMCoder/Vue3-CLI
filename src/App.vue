@@ -46,6 +46,13 @@
         </option>
       </select>
     </div>
+    <div>
+      <div>{{ task }}</div>
+      <input type="text" v-model.trim="task" />
+      <div>{{ age }}</div>
+      <input type="number" v-model.number="age" />
+    </div>
+    <p>{{ nameTransform }}</p>
   </div>
 </template>
 
@@ -77,7 +84,15 @@ export default {
           value: "d",
         },
       ],
+      task: "",
+      age: 20,
+      name: "myo thant kyaw",
     };
+  },
+  computed: {
+    nameTransform() {
+      return this.name.charAt(0).toUpperCase();
+    },
   },
 };
 </script>
