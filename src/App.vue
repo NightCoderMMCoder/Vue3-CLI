@@ -2,7 +2,7 @@
   <h1>App</h1>
   <TheHeader></TheHeader>
   <div class="container">
-    <CalculateTransaction></CalculateTransaction>
+    <CalculateTransaction :transactions="transactions"></CalculateTransaction>
     <transactions-list
       :transactions="transactions"
       @delete-transaction="removeTransaction"
@@ -30,17 +30,17 @@ export default {
         {
           id: 1,
           name: "Cash",
-          amount: -4000,
+          amount: -400,
         },
         {
           id: 2,
           name: "Salary",
-          amount: 60000000,
+          amount: 600000,
         },
         {
           id: 3,
           name: "Computer",
-          amount: -1000000,
+          amount: -10000,
         },
       ],
     };

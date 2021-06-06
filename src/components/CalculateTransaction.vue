@@ -1,21 +1,51 @@
 <template>
   <h4>Your Balance</h4>
-  <h1 id="balance">$0.00</h1>
+  <h1 id="balance">{{ totalBalance }} ks</h1>
 
   <div class="inc-exp-container">
     <div>
       <h4>Income</h4>
-      <p id="money-plus" class="money plus">+$0.00</p>
+      <p id="money-plus" class="money plus">{{ calcIncome }} ks</p>
     </div>
     <div>
       <h4>Expense</h4>
-      <p id="money-minus" class="money minus">-$0.00</p>
+      <p id="money-minus" class="money minus">{{ calcExpense }} ks</p>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["transactions"],
+  computed: {
+    calcIncome() {
+      return this.formatToCurrency(
+        this.transactions
+          .filter((transaction) => transaction.amount > 0)
+          .reduce((total, cur) => total + cur.amount, 0)
+      );
+    },
+    calcExpense() {
+      return this.formatToCurrency(
+        this.transactions
+          .filter((transaction) => transaction.amount < 0)
+          .reduce((total, cur) => total + cur.amount, 0)
+      );
+    },
+    totalBalance() {
+      return this.formatToCurrency(
+        this.transactions.reduce((total, cur) => total + cur.amount, 0)
+      );
+    },
+  },
+  methods: {
+    formatToCurrency(value) {
+      return Math.abs(value)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    },
+  },
+};
 </script>
 
 <style scoped>
