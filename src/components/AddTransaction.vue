@@ -1,4 +1,15 @@
 <template>
+  <base-dialog :show-dialog="showDialog">
+    <template #header>
+      Validation Error
+    </template>
+    <template v-slot:body>
+      Please Fill All Form.
+    </template>
+    <template v-slot:actions>
+      <base-button @click="showDialog = false">Close</base-button>
+    </template>
+  </base-dialog>
   <h3>Add new transaction</h3>
   <form @submit.prevent="addTransaction">
     <div class="form-control">
@@ -27,7 +38,10 @@
 </template>
 
 <script>
+import BaseButton from "./UI/BaseButton.vue";
+import BaseDialog from "./UI/BaseDialog.vue";
 export default {
+  components: { BaseDialog, BaseButton },
   name: "AddTransaction",
   emits: ["addTransaction"],
   data() {
@@ -37,6 +51,7 @@ export default {
         amount: "",
       },
       errors: {},
+      showDialog: false,
     };
   },
   methods: {
@@ -46,6 +61,8 @@ export default {
         this.$emit("addTransaction", this.transaction);
         this.transaction.name = "";
         this.transaction.amount = "";
+      } else {
+        this.showDialog = true;
       }
     },
     validation() {

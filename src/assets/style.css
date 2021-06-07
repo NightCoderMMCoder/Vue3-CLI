@@ -72,3 +72,9 @@ input[type="number"] {
 .delete-btn:focus {
   outline: 0;
 }
+
+.flat {
+  background: transparent !important;
+  border: 2px solid #9c88ff !important;
+  color: #9c88ff !important;
+}

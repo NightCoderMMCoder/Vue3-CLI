@@ -1,9 +1,13 @@
 <template>
-  <base-dialog
-    :show-dialog="showDialog"
-    @cancel="toggleDialog"
-    @delete-transaction="removeTransaction"
-  ></base-dialog>
+  <base-dialog :show-dialog="showDialog">
+    <template v-slot:body>
+      Are you sure to delete?
+    </template>
+    <template v-slot:actions>
+      <base-button class="flat" @click="toggleDialog">Cancel</base-button>
+      <base-button @click="removeTransaction">Ok</base-button>
+    </template>
+  </base-dialog>
   <TheHeader></TheHeader>
   <div class="container">
     <CalculateTransaction :transactions="transactions"></CalculateTransaction>
@@ -21,6 +25,7 @@ import CalculateTransaction from "./components/CalculateTransaction.vue";
 import TheHeader from "./components/Layouts/TheHeader.vue";
 import TransactionsList from "./components/TransactionsList.vue";
 import BaseDialog from "./components/UI/BaseDialog.vue";
+import BaseButton from "./components/UI/BaseButton.vue";
 import { v4 as uuidv4 } from "uuid";
 export default {
   name: "App",
@@ -30,6 +35,7 @@ export default {
     TransactionsList,
     AddTransaction,
     BaseDialog,
+    BaseButton,
   },
   data() {
     return {
