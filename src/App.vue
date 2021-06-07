@@ -54,7 +54,7 @@ export default {
       this.transactions.splice(idx, 1);
     },
     addTransaction(transaction) {
-      this.transactions.push({
+      this.transactions.unshift({
         id: uuidv4(),
         ...transaction,
       });
