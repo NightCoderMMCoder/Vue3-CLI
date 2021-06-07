@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ["transactions"],
+  props: { transactions: Array },
   computed: {
     calcIncome() {
       return this.formatToCurrency(

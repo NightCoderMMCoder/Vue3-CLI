@@ -32,7 +32,7 @@ import BaseButton from "./BaseButton.vue";
 
 export default {
   components: { BaseButton },
-  props: ["showDialog"],
+  props: { showDialog: Boolean },
 };
 </script>
 

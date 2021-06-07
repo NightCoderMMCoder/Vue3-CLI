@@ -14,7 +14,12 @@
 import TransactionItem from "./TransactionItem.vue";
 export default {
   components: { TransactionItem },
-  props: ["transactions"],
+  props: {
+    transactions: {
+      type: Array,
+      required: true,
+    },
+  },
   emits: ["deleteTransaction"],
 };
 </script>

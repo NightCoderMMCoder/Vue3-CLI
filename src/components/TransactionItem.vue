@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ["transaction"],
+  props: { transaction: Object },
   emits: ["deleteTransaction"],
   computed: {
     listClass() {
