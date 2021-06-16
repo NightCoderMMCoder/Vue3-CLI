@@ -1,5 +1,17 @@
 <template>
-  <h1>Test</h1>
+  <div>
+    <header>
+      <slot name="header"></slot>
+    </header>
+    <main>
+      <slot name="main"></slot>
+    </main>
+    <footer>
+      <slot name="footer">
+        &copy; copyright 2021
+      </slot>
+    </footer>
+  </div>
 </template>
 
 <script>

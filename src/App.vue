@@ -70,15 +70,35 @@
     </div>
     {{ numberPlus }}
     <button v-on:click="this.numberPlus = Math.random()">Click Me</button>
-    <Test v-if="showTestCom" :text="text" />
+    <Test v-if="showTestCom" :text="text">
+      <template v-slot:header>
+        <h1>Slot</h1>
+      </template>
+      <template v-slot:main>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, rerum
+          ullam minus inventore debitis voluptatem dolorem eveniet dolor ut
+          adipisci quia quasi odio provident repudiandae sunt maxime! Vitae,
+          voluptatem alias.
+        </p>
+      </template>
+    </Test>
     <button v-on:click="showTestCom = !showTestCom">Toggle</button>
+    <scoped-slots :options="options" v-slot="{ option: { text } }">
+      {{ text }}
+      <button>Delete</button>
+    </scoped-slots>
+    <scoped-slots :options="options" v-slot="{ option: { text } }">
+      {{ text }}
+    </scoped-slots>
   </div>
 </template>
 
 <script>
+import ScopedSlots from "./components/ScopedSlots.vue";
 import Test from "./components/Test.vue";
 export default {
-  components: { Test },
+  components: { Test, ScopedSlots },
   name: "App",
   data() {
     return {
