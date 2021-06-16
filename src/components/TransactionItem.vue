@@ -3,7 +3,7 @@
     {{ transaction.name }}
     <span>
       {{ minusOrPlus }}
-      {{ formatToCurrency }} ks
+      {{ formatAmount }} ks
     </span>
     <button
       class="delete-btn"
@@ -15,9 +15,11 @@
 </template>
 
 <script>
+import formatAmountMixin from "../mixins/formatToCurrency";
 export default {
   props: { transaction: Object },
   emits: ["deleteTransaction"],
+  mixins: [formatAmountMixin],
   computed: {
     listClass() {
       return this.transaction.amount > 0 ? "plus" : "minus";
@@ -25,10 +27,8 @@ export default {
     minusOrPlus() {
       return this.transaction.amount > 0 ? "+" : "-";
     },
-    formatToCurrency() {
-      return Math.abs(this.transaction.amount)
-        .toFixed(2)
-        .replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    formatAmount() {
+      return this.formatToCurrency(this.transaction.amount);
     },
   },
 };

@@ -14,8 +14,10 @@
 </template>
 
 <script>
+import formatAmountMixin from "../mixins/formatToCurrency";
 export default {
   props: { transactions: Array },
+  mixins: [formatAmountMixin],
   computed: {
     calcIncome() {
       return this.formatToCurrency(
@@ -37,17 +39,19 @@ export default {
       );
     },
     minusOrPlus() {
-      return Number(this.calcIncome.replace(/[^0-9\.]+/g, "")) >
-        Number(this.calcExpense.replace(/[^0-9\.]+/g, ""))
+      return this.currencyToNumber(this.calcIncome) -
+        this.currencyToNumber(this.calcExpense) ===
+        0
+        ? ""
+        : this.currencyToNumber(this.calcIncome) >
+          this.currencyToNumber(this.calcExpense)
         ? "+"
         : "-";
     },
   },
   methods: {
-    formatToCurrency(value) {
-      return Math.abs(value)
-        .toFixed(2)
-        .replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    currencyToNumber(value) {
+      return Number(value.replace(/[^0-9\.]+/g, ""));
     },
   },
 };
