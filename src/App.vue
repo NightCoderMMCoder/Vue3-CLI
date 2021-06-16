@@ -70,11 +70,15 @@
     </div>
     {{ numberPlus }}
     <button v-on:click="this.numberPlus = Math.random()">Click Me</button>
+    <Test v-if="showTestCom" :text="text" />
+    <button v-on:click="showTestCom = !showTestCom">Toggle</button>
   </div>
 </template>
 
 <script>
+import Test from "./components/Test.vue";
 export default {
+  components: { Test },
   name: "App",
   data() {
     return {
@@ -110,6 +114,7 @@ export default {
       showText: false,
       count: 100,
       number: 4,
+      showTestCom: true,
     };
   },
   computed: {
@@ -134,6 +139,32 @@ export default {
       set(val) {
         this.number = val;
       },
+    },
+  },
+  // beforeCreate() {
+  //   console.log("beforeCreate");
+  // },
+  // created() {
+  //   console.log("created");
+  // },
+  // beforeMount() {
+  //   console.log("beforeMount");
+  // },
+  mounted() {
+    setTimeout(() => {
+      this.text = "Something changed";
+    }, 3000);
+    console.log("mounted");
+  },
+  // beforeUpdate() {
+  //   console.log("beforeUpdate");
+  // },
+  // updated() {
+  //   console.log("updated");
+  // },
+  watch: {
+    publicPost(val) {
+      console.log(val);
     },
   },
 };
